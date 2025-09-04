@@ -17,7 +17,7 @@ namespace Api.Database
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.UserName).IsRequired();
+                entity.HasIndex(u => u.UserName).IsUnique();
                 entity.Property(e => e.PasswordHash).IsRequired();
             });
         }

@@ -1,4 +1,6 @@
 using Api.Database;
+using Api.Interfaces;
+using Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api
@@ -14,6 +16,9 @@ namespace Api
                 string? connectionString = Environment.GetEnvironmentVariable("diploma-dev", EnvironmentVariableTarget.User);
                 options.UseNpgsql(connectionString);
             });
+
+            builder.Services.AddScoped<IUsersService, UserService>();
+
             builder.Services.AddCors(builder =>
             {
                 builder.AddPolicy("LocalDevelopment", policy =>
