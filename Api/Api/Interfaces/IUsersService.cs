@@ -5,12 +5,12 @@ namespace Api.Interfaces
 {
     public interface IUsersService
     {
-        Task<User?> RegisterUser(RegisterUserDTO registerUserDTO);
+        Task<User?> RegisterUserAsync(RegisterUserDTO registerUserDTO);
 
-        Task<bool> ValidateUserCredentials(string userName, string password);
+        Task<bool> ValidateUserCredentialsAsync(string userName, string password);
 
-        Task<User?> GetUserByUsername(string username);
+        Task<User?> GetUserByUsernameAsync(string username);
 
-        Task<User?> GetUserById(Guid userId);
+        Task<User?> GetUserByIdAsync(Guid userId);
     }
 }

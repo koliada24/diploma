@@ -19,7 +19,7 @@ namespace Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDTO registerUserDTO)
         {
-            var user = await _usersService.RegisterUser(registerUserDTO);
+            var user = await _usersService.RegisterUserAsync(registerUserDTO);
 
             var token = _jwtService.GenerateTokenForUser(user);
             var cookieOptions = new CookieOptions
@@ -34,14 +34,14 @@ namespace Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO loginDTO)
         {
-            var isValid = await _usersService.ValidateUserCredentials(loginDTO.Username, loginDTO.Password);
+            var isValid = await _usersService.ValidateUserCredentialsAsync(loginDTO.Username, loginDTO.Password);
 
             if (!isValid)
             {
                 return Unauthorized();
             }
 
-            var user = await _usersService.GetUserByUsername(loginDTO.Username);
+            var user = await _usersService.GetUserByUsernameAsync(loginDTO.Username);
 
             var token = _jwtService.GenerateTokenForUser(user);
             var cookieOptions = new CookieOptions
@@ -63,7 +63,7 @@ namespace Api.Controllers
 
             var userId = _jwtService.GetUserIdFromToken(token);
 
-            var currentUser = await _usersService.GetUserById(userId);
+            var currentUser = await _usersService.GetUserByIdAsync(userId);
 
             return Ok(currentUser?.UserName);
         }
