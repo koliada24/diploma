@@ -18,6 +18,12 @@ namespace Api.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterUserDTO registerUserDTO)
         {
             var userId = await _usersService.RegisterUser(registerUserDTO);
+
+            if (userId == Guid.Empty)
+            {
+                return BadRequest("User registration failed. Username might already be taken.");
+            }
+
             return Ok(userId);
         }
 

@@ -26,8 +26,15 @@ namespace Api.Services
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerUserDTO.Password)
             };
 
-            _db.Users.Add(userToSave);
-            await _db.SaveChangesAsync();
+            try
+            {
+                _db.Users.Add(userToSave);
+                await _db.SaveChangesAsync();
+            }
+            catch
+            {
+                return Guid.Empty;
+            }
 
             return guid;
         }
