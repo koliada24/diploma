@@ -8,23 +8,22 @@ namespace Api.Controllers
     public class IdentityController : ControllerBase
     {
         private readonly IUsersService _usersService;
+        private readonly IJwtService _jwtService;
 
-        public IdentityController(IUsersService usersService)
+        public IdentityController(IUsersService usersService, IJwtService jwtService)
         {
             _usersService = usersService;
+            _jwtService = jwtService;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDTO registerUserDTO)
         {
-            var userId = await _usersService.RegisterUser(registerUserDTO);
+            var user = await _usersService.RegisterUser(registerUserDTO);
 
-            if (userId == Guid.Empty)
-            {
-                return BadRequest("User registration failed. Username might already be taken.");
-            }
+            var token = _jwtService.GenerateTokenForUser(user);
 
-            return Ok(userId);
+            return Ok();
         }
 
         [HttpPost("login")]
@@ -36,6 +35,8 @@ namespace Api.Controllers
             {
                 return Unauthorized();
             }
+
+            var token = _jwtService.GenerateTokenForUsername(loginDTO.Username);
 
             return Ok();
         }

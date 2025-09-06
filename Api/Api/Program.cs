@@ -18,6 +18,7 @@ namespace Api
             });
 
             builder.Services.AddScoped<IUsersService, UserService>();
+            builder.Services.AddScoped<IJwtService, JwtService>();
 
             builder.Services.AddCors(builder =>
             {

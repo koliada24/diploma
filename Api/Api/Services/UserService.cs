@@ -15,7 +15,7 @@ namespace Api.Services
             _db = db;
         }
 
-        public async Task<Guid> RegisterUser(RegisterUserDTO registerUserDTO)
+        public async Task<User?> RegisterUser(RegisterUserDTO registerUserDTO)
         {
             var guid = Guid.NewGuid();
 
@@ -25,18 +25,11 @@ namespace Api.Services
                 UserName = registerUserDTO.Username,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerUserDTO.Password)
             };
+            
+            _db.Users.Add(userToSave);
+            await _db.SaveChangesAsync();
 
-            try
-            {
-                _db.Users.Add(userToSave);
-                await _db.SaveChangesAsync();
-            }
-            catch
-            {
-                return Guid.Empty;
-            }
-
-            return guid;
+            return userToSave;
         }
 
         public async Task<bool> ValidateUserCredentials(string userName, string password)
