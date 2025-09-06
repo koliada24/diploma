@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class IdentityController : ControllerBase
+    public class IdentityController : AppBaseController
     {
         private readonly IUsersService _usersService;
         private readonly IJwtService _jwtService;
@@ -54,18 +54,9 @@ namespace Api.Controllers
         }
 
         [HttpGet("me")]
-        public async Task<IActionResult> GetCurrentUser()
+        public IActionResult GetCurrentUser()
         {
-            if (!Request.Cookies.TryGetValue("jwt_token", out var token))
-            {
-                return Unauthorized();
-            }
-
-            var userId = _jwtService.GetUserIdFromToken(token);
-
-            var currentUser = await _usersService.GetUserByIdAsync(userId);
-
-            return Ok(currentUser?.UserName);
+           return Ok(Username);
         }
     }
 }

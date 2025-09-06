@@ -8,7 +8,5 @@ namespace Api.Interfaces
         string GenerateTokenForUser(User user);
 
         ClaimsIdentity GetClaimsIdentityFromToken(string token);
-
-        Guid GetUserIdFromToken(string token);
     }
 }

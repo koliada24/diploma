@@ -1,5 +1,6 @@
 using Api.Database;
 using Api.Interfaces;
+using Api.Middlewares;
 using Api.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,7 @@ namespace Api
 
             app.UseCors("LocalDevelopment");
             app.MapControllers();
+            app.UseMiddleware<IdentityMiddleware>();
 
             app.Run();
         }

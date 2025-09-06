@@ -52,13 +52,5 @@ namespace Api.Services
             var identity = new ClaimsIdentity(jwtToken.Claims, "jwt");
             return identity;
         }
-
-        public Guid GetUserIdFromToken(string token)
-        {
-            var identity = GetClaimsIdentityFromToken(token);
-            var userId = Guid.Parse(identity.Claims.FirstOrDefault(x => x.Type == "sub")!.Value);
-
-            return userId;
-        }
     }
 }
