@@ -43,5 +43,12 @@ namespace Api.Services
 
             return BCrypt.Net.BCrypt.Verify(password, matchedUser.PasswordHash);
         }
+
+        public async Task<User?> GetUserByUsername(string username)
+        {
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.UserName == username);
+
+            return user;
+        }
     }
 }

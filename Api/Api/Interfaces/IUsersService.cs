@@ -8,5 +8,7 @@ namespace Api.Interfaces
         Task<User?> RegisterUser(RegisterUserDTO registerUserDTO);
 
         Task<bool> ValidateUserCredentials(string userName, string password);
+
+        Task<User?> GetUserByUsername(string username);
     }
 }
