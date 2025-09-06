@@ -22,7 +22,8 @@ namespace Api.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat,
+                new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
                 new Claim(ClaimTypes.NameIdentifier, user.UserName.ToString())
             };
 
@@ -41,6 +42,23 @@ namespace Api.Services
             var token = jwtTokenHandler.WriteToken(tokenGenerator);
 
             return token;
+        }
+
+        public ClaimsIdentity GetClaimsIdentityFromToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            var identity = new ClaimsIdentity(jwtToken.Claims, "jwt");
+            return identity;
+        }
+
+        public Guid GetUserIdFromToken(string token)
+        {
+            var identity = GetClaimsIdentityFromToken(token);
+            var userId = Guid.Parse(identity.Claims.FirstOrDefault(x => x.Type == "sub")!.Value);
+
+            return userId;
         }
     }
 }

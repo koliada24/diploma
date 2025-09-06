@@ -10,5 +10,7 @@ namespace Api.Interfaces
         Task<bool> ValidateUserCredentials(string userName, string password);
 
         Task<User?> GetUserByUsername(string username);
+
+        Task<User?> GetUserById(Guid userId);
     }
 }

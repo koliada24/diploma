@@ -50,5 +50,12 @@ namespace Api.Services
 
             return user;
         }
+
+        public async Task<User?> GetUserById(Guid userId)
+        {
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user;
+        }
     }
 }

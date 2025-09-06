@@ -22,7 +22,11 @@ namespace Api.Controllers
             var user = await _usersService.RegisterUser(registerUserDTO);
 
             var token = _jwtService.GenerateTokenForUser(user);
-            SetTokenToCookie(token);
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
+            Response.Cookies.Append("jwt_token", token, cookieOptions);
 
             return Ok();
         }
@@ -40,19 +44,28 @@ namespace Api.Controllers
             var user = await _usersService.GetUserByUsername(loginDTO.Username);
 
             var token = _jwtService.GenerateTokenForUser(user);
-            SetTokenToCookie(token);
-
-            return Ok();
-        }
-
-        private void SetTokenToCookie(string token)
-        {
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.UtcNow.AddDays(7)
             };
-
             Response.Cookies.Append("jwt_token", token, cookieOptions);
+
+            return Ok();
+        }
+
+        [HttpGet("me")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            if (!Request.Cookies.TryGetValue("jwt_token", out var token))
+            {
+                return Unauthorized();
+            }
+
+            var userId = _jwtService.GetUserIdFromToken(token);
+
+            var currentUser = await _usersService.GetUserById(userId);
+
+            return Ok(currentUser?.UserName);
         }
     }
 }
