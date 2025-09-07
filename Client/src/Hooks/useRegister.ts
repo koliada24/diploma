@@ -12,7 +12,6 @@ export function useRegister(): useRegisterResult {
 
   const handleRegistration = async (registerUserDTO: RegisterUserDTO) => {
     try {
-      console.log('called');
       const response = await axios.post(`${config.apiUrl}/identity/register`, registerUserDTO);
 
       if (response.status === 200) {

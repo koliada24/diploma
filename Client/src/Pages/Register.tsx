@@ -8,7 +8,6 @@ export function Register() {
   const { handleRegistration } = useRegister();
 
   const submitRegistration = async () => {
-    console.log("clicked");
     await handleRegistration({ username, password});
   };
 
