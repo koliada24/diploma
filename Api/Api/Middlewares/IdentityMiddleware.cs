@@ -21,6 +21,7 @@ namespace Api.Middlewares
                 context.Items["UserId"] = string.Empty;
                 context.Items["Username"] = string.Empty;
                 await _next(context);
+                return;
             }
 
             var identity = jwtService.GetClaimsIdentityFromToken(token);
@@ -32,6 +33,7 @@ namespace Api.Middlewares
             context.Items["Username"] = userName;
 
             await _next(context);
+            return;
         }
     }
 }

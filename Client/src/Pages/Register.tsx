@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useRegister } from "../Hooks/useRegister";
 
 export function Register() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { handleRegistration } = useRegister();
 
-  const submitRegistration = () => {
-
+  const submitRegistration = async () => {
+    console.log("clicked");
+    await handleRegistration({ username, password});
   };
 
   return(
