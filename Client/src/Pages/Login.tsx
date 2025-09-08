@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useLogin } from "../Hooks/useLogin";
 
 export function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { handleLogin } = useLogin();
 
-  const submitLogin = () => {
-
+  const submitLogin = async () => {
+    await handleLogin({username, password});
   };
 
   return (
