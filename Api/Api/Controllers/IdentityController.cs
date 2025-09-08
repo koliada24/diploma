@@ -22,11 +22,7 @@ namespace Api.Controllers
             var user = await _usersService.RegisterUserAsync(registerUserDTO);
 
             var token = _jwtService.GenerateTokenForUser(user);
-            var cookieOptions = new CookieOptions
-            {
-                Expires = DateTime.UtcNow.AddDays(7)
-            };
-            Response.Cookies.Append("jwt_token", token, cookieOptions);
+            Response.Cookies.Append("jwt_token", token);
 
             return Ok();
         }
@@ -44,11 +40,7 @@ namespace Api.Controllers
             var user = await _usersService.GetUserByUsernameAsync(loginDTO.Username);
 
             var token = _jwtService.GenerateTokenForUser(user);
-            var cookieOptions = new CookieOptions
-            {
-                Expires = DateTime.UtcNow.AddDays(7)
-            };
-            Response.Cookies.Append("jwt_token", token, cookieOptions);
+            Response.Cookies.Append("jwt_token", token);
 
             return Ok();
         }

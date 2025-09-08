@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './../axios';
 import type { RegisterUserDTO } from '../Models/RegisterUserDTO';
 import config from './../config';
 import { useNavigate } from 'react-router-dom';

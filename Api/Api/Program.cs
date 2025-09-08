@@ -36,8 +36,8 @@ namespace Api
             var app = builder.Build();
 
             app.UseCors("LocalDevelopment");
-            app.MapControllers();
             app.UseMiddleware<IdentityMiddleware>();
+            app.MapControllers();
 
             app.Run();
         }
