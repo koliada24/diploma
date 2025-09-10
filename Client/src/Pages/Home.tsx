@@ -1,5 +1,9 @@
+import { MenuLayout } from "./Layouts/MenuLayout/MenuLayout";
+
 export function Home() {
   return (
-    <h1>Home page</h1>
+    <MenuLayout>
+      <h1>Home page</h1>
+    </MenuLayout>
   );
 }

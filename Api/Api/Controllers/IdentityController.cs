@@ -45,6 +45,13 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt_token");
+            return Ok();
+        }
+
         [HttpGet("me")]
         public IActionResult GetCurrentUser()
         {
