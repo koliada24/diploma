@@ -1,4 +1,4 @@
-import axios from './../axios';
+import useConfiguredAxios from './../axios';
 import type { RegisterUserDTO } from '../Models/RegisterUserDTO';
 import config from './../config';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ interface useRegisterResult {
 
 export function useRegister(): useRegisterResult {
   const navigate = useNavigate();
+  const { axios } = useConfiguredAxios();
 
   const handleRegistration = async (registerUserDTO: RegisterUserDTO) => {
     try {
