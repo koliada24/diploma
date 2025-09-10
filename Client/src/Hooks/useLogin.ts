@@ -1,4 +1,4 @@
-import useConfiguredAxios from './../axios';
+import axios from './../axios';
 import type { LoginUserDTO } from '../Models/LoginUserDTO';
 import config from './../config';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,6 @@ interface useLoginResult {
 
 export function useLogin(): useLoginResult {
   const navigate = useNavigate();
-  const { axios } = useConfiguredAxios();
 
   const handleLogin = async (LoginUserDTO: LoginUserDTO) => {
     try {
