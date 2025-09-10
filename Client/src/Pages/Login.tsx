@@ -12,7 +12,8 @@ export function Login() {
   };
 
   return (
-    <Form className='d-flex flex-column'>
+    <div className="center-div">
+      <Form className='d-flex flex-column'>
 
       <Form.Group className='mb-3'>
         <Form.Label htmlFor='username'>Username</Form.Label>
@@ -31,6 +32,7 @@ export function Login() {
         <a href="/register">Sign up</a>
       </div>
 
-    </Form>
+      </Form>
+    </div>
   )
 }
