@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import useConfiguredAxios from "../../../../axios";
+import axios from "../../../../axios";
 import config from "../../../../config";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../Contexts/AuthContext";
 
 interface useMenuLayoutHeaderProps {
   username: string;
@@ -9,26 +9,8 @@ interface useMenuLayoutHeaderProps {
 }
 
 export default function useMenuLayoutHeader(): useMenuLayoutHeaderProps {
-  const { axios } = useConfiguredAxios();
   const navigate = useNavigate();
-
-  const [ username, setUsername ] = useState<string>('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${config.apiUrl}/identity/me`);
-        if (response.status == 200) {
-          setUsername(response.data);
-        }
-      }
-      catch {
-        // TODO: handle failed fetch username attempt
-      }
-    };
-
-    fetchData();
-  }, []);
+  const authState = useAuth();
 
   const handleLogout = async () => {
     const response = await axios.post(`${config.apiUrl}/identity/logout`)
@@ -38,7 +20,7 @@ export default function useMenuLayoutHeader(): useMenuLayoutHeaderProps {
   }
 
   return {
-    username: username,
+    username: authState.currentUserName,
     handleLogout: handleLogout
   }
 }

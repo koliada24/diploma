@@ -1,7 +1,8 @@
-import useConfiguredAxios from './../axios';
+import axios from './../axios';
 import type { RegisterUserDTO } from '../Models/RegisterUserDTO';
 import config from './../config';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
 
 interface useRegisterResult {
   handleRegistration: (registerUserDTO: RegisterUserDTO) => Promise<void>;
@@ -9,13 +10,14 @@ interface useRegisterResult {
 
 export function useRegister(): useRegisterResult {
   const navigate = useNavigate();
-  const { axios } = useConfiguredAxios();
+  const { refreshAuth } = useAuth();
 
   const handleRegistration = async (registerUserDTO: RegisterUserDTO) => {
     try {
       const response = await axios.post(`${config.apiUrl}/identity/register`, registerUserDTO);
 
       if (response.status === 200) {
+        await refreshAuth();
         navigate('/home')
       }
       else {
