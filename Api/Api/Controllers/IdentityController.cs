@@ -17,7 +17,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserDTO registerUserDTO)
+        public async Task<ActionResult> Register([FromBody] RegisterUserDTO registerUserDTO)
         {
             var user = await _usersService.RegisterUserAsync(registerUserDTO);
 
@@ -28,7 +28,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserDTO loginDTO)
+        public async Task<ActionResult> Login([FromBody] LoginUserDTO loginDTO)
         {
             var isValid = await _usersService.ValidateUserCredentialsAsync(loginDTO.Username, loginDTO.Password);
 
@@ -53,9 +53,21 @@ namespace Api.Controllers
         }
 
         [HttpGet("me")]
-        public IActionResult GetCurrentUser()
+        public ActionResult<AuthState> GetAuthStateInfo()
         {
-           return Ok(Username);
+            var currentAuthState = new AuthState
+            {
+                IsAuthenticated = false,
+                CurrentUserName = string.Empty
+            };
+
+            if (Username != string.Empty)
+            {
+                currentAuthState.IsAuthenticated = true;
+                currentAuthState.CurrentUserName = Username;
+            }
+
+            return Ok(currentAuthState);
         }
     }
 }
