@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useConfiguredAxios from "../../../../axios";
+import axios from "../../../../axios";
 import config from "../../../../config";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,6 @@ interface useMenuLayoutHeaderProps {
 }
 
 export default function useMenuLayoutHeader(): useMenuLayoutHeaderProps {
-  const { axios } = useConfiguredAxios();
   const navigate = useNavigate();
 
   const [ username, setUsername ] = useState<string>('');
