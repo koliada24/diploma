@@ -1,7 +1,7 @@
-﻿using Api.DTOs;
-using Api.Models;
+﻿using Api.DTOs.Identity;
+using Api.Models.Identity;
 
-namespace Api.Interfaces
+namespace Api.Interfaces.Identity
 {
     public interface IUsersService
     {

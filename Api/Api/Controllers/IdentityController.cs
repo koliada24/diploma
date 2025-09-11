@@ -1,5 +1,5 @@
-﻿using Api.DTOs;
-using Api.Interfaces;
+﻿using Api.DTOs.Identity;
+using Api.Interfaces.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -58,13 +58,15 @@ namespace Api.Controllers
             var currentAuthState = new AuthState
             {
                 IsAuthenticated = false,
-                CurrentUserName = string.Empty
+                CurrentUserName = string.Empty,
+                CurrentUserId = Guid.Empty
             };
 
             if (Username != string.Empty)
             {
                 currentAuthState.IsAuthenticated = true;
                 currentAuthState.CurrentUserName = Username;
+                currentAuthState.CurrentUserId = UserId;
             }
 
             return Ok(currentAuthState);

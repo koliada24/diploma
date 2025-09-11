@@ -1,4 +1,4 @@
-﻿using Api.Interfaces;
+﻿using Api.Interfaces.Identity;
 using System.Security.Claims;
 
 namespace Api.Middlewares

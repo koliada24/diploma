@@ -5,6 +5,7 @@ import config from "../config";
 interface AuthState {
   isAuthenticated: boolean;
   currentUserName: string;
+  currentUserId: string;
   isStateUpdated: boolean;
   refreshAuth: () => Promise<void>;
 }
@@ -12,6 +13,7 @@ interface AuthState {
 const defaultAuthState: AuthState = {
   isAuthenticated: false,
   currentUserName: '',
+  currentUserId: '',
   isStateUpdated: false,
   refreshAuth: async () => { },
 }
@@ -30,6 +32,7 @@ export const AuthProvider = ({ children }: any) => {
         setAuthState({
           isAuthenticated: response.data.isAuthenticated,
           currentUserName: response.data.currentUserName,
+          currentUserId: response.data.currentUserId,
           isStateUpdated: true,
           refreshAuth: refreshAuth
         });

@@ -3,6 +3,7 @@ using System;
 using Api.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250911065509_AddTablesForExamTemplates")]
+    partial class AddTablesForExamTemplates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Api.Database.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Api.Models.Exams.AnswerTemplate", b =>
+            modelBuilder.Entity("Api.Models.AnswerTemplate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,13 +50,10 @@ namespace Api.Database.Migrations
                     b.ToTable("AnswerTemplates");
                 });
 
-            modelBuilder.Entity("Api.Models.Exams.ExamTemplate", b =>
+            modelBuilder.Entity("Api.Models.ExamTemplate", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CreatedById")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
@@ -62,12 +62,10 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
-
                     b.ToTable("ExamTemplates");
                 });
 
-            modelBuilder.Entity("Api.Models.Exams.QuestionTemplate", b =>
+            modelBuilder.Entity("Api.Models.QuestionTemplate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,7 +87,7 @@ namespace Api.Database.Migrations
                     b.ToTable("QuestionTemplates");
                 });
 
-            modelBuilder.Entity("Api.Models.Identity.User", b =>
+            modelBuilder.Entity("Api.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,44 +109,28 @@ namespace Api.Database.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Api.Models.Exams.AnswerTemplate", b =>
+            modelBuilder.Entity("Api.Models.AnswerTemplate", b =>
                 {
-                    b.HasOne("Api.Models.Exams.QuestionTemplate", null)
+                    b.HasOne("Api.Models.QuestionTemplate", null)
                         .WithMany("Answers")
                         .HasForeignKey("QuestionTemplateId");
                 });
 
-            modelBuilder.Entity("Api.Models.Exams.ExamTemplate", b =>
+            modelBuilder.Entity("Api.Models.QuestionTemplate", b =>
                 {
-                    b.HasOne("Api.Models.Identity.User", "CreatedBy")
-                        .WithMany("ExamTemplates")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("Api.Models.Exams.QuestionTemplate", b =>
-                {
-                    b.HasOne("Api.Models.Exams.ExamTemplate", null)
+                    b.HasOne("Api.Models.ExamTemplate", null)
                         .WithMany("Questions")
                         .HasForeignKey("ExamTemplateId");
                 });
 
-            modelBuilder.Entity("Api.Models.Exams.ExamTemplate", b =>
+            modelBuilder.Entity("Api.Models.ExamTemplate", b =>
                 {
                     b.Navigation("Questions");
                 });
 
-            modelBuilder.Entity("Api.Models.Exams.QuestionTemplate", b =>
+            modelBuilder.Entity("Api.Models.QuestionTemplate", b =>
                 {
                     b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("Api.Models.Identity.User", b =>
-                {
-                    b.Navigation("ExamTemplates");
                 });
 #pragma warning restore 612, 618
         }
