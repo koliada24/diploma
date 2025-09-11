@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useRegister } from "../Hooks/useRegister";
+import { useRegister } from "../../Hooks/useRegister";
 
 export function Register() {
   const [username, setUsername] = useState<string>('');
