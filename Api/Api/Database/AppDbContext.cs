@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.Models.Exams;
+using Api.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Database

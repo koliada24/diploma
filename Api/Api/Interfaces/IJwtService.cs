@@ -1,4 +1,4 @@
-﻿using Api.Models;
+﻿using Api.Models.Identity;
 using System.Security.Claims;
 
 namespace Api.Interfaces
