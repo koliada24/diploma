@@ -58,13 +58,15 @@ namespace Api.Controllers
             var currentAuthState = new AuthState
             {
                 IsAuthenticated = false,
-                CurrentUserName = string.Empty
+                CurrentUserName = string.Empty,
+                CurrentUserId = Guid.Empty
             };
 
             if (Username != string.Empty)
             {
                 currentAuthState.IsAuthenticated = true;
                 currentAuthState.CurrentUserName = Username;
+                currentAuthState.CurrentUserId = UserId;
             }
 
             return Ok(currentAuthState);
