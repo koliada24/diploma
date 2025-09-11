@@ -1,4 +1,6 @@
+import { MenuLayoutContent } from "./MenuLayoutContent";
 import { MenuLayoutHeader } from "./MenuLayoutHeader/MenuLayoutHeader";
+import { MenuLayoutSidebar } from "./MenuLayoutSidebar";
 
 interface MenuLayoutProps {
   children: any;
@@ -7,8 +9,13 @@ interface MenuLayoutProps {
 export function MenuLayout({ children }: MenuLayoutProps) {
   return (
     <>
-      <MenuLayoutHeader />
-      {children}
+      <div className="d-flex">
+        <MenuLayoutSidebar />
+        <div className="p-0 w-100 margin-left-15-percent">
+          <MenuLayoutHeader />
+          <MenuLayoutContent children={children} />
+        </div>
+      </div>
     </>
   );
 }
