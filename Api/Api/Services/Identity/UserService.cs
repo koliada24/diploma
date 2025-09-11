@@ -1,10 +1,10 @@
 ﻿using Api.Database;
-using Api.DTOs;
-using Api.Interfaces;
+using Api.DTOs.Identity;
+using Api.Interfaces.Identity;
 using Api.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Api.Services
+namespace Api.Services.Identity
 {
     public class UserService : IUsersService
     {

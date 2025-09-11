@@ -1,7 +1,7 @@
 using Api.Database;
-using Api.Interfaces;
+using Api.Interfaces.Identity;
 using Api.Middlewares;
-using Api.Services;
+using Api.Services.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api

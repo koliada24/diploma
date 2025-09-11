@@ -1,7 +1,7 @@
 ﻿using Api.Models.Identity;
 using System.Security.Claims;
 
-namespace Api.Interfaces
+namespace Api.Interfaces.Identity
 {
     public interface IJwtService
     {        

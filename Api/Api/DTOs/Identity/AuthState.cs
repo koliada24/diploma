@@ -1,4 +1,4 @@
-﻿namespace Api.DTOs
+﻿namespace Api.DTOs.Identity
 {
     public class AuthState
     {

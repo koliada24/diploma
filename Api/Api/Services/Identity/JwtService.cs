@@ -1,11 +1,11 @@
-﻿using Api.Interfaces;
+﻿using Api.Interfaces.Identity;
 using Api.Models.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Api.Services
+namespace Api.Services.Identity
 {
     public class JwtService : IJwtService
     {

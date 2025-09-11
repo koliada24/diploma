@@ -1,5 +1,5 @@
-﻿using Api.DTOs;
-using Api.Interfaces;
+﻿using Api.DTOs.Identity;
+using Api.Interfaces.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
