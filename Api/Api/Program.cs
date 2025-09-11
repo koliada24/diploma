@@ -1,6 +1,8 @@
 using Api.Database;
+using Api.Interfaces.Exams;
 using Api.Interfaces.Identity;
 using Api.Middlewares;
+using Api.Services.Exams;
 using Api.Services.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +22,7 @@ namespace Api
 
             builder.Services.AddScoped<IUsersService, UserService>();
             builder.Services.AddScoped<IJwtService, JwtService>();
+            builder.Services.AddScoped<IExamsService, ExamsService>();
 
             builder.Services.AddCors(builder =>
             {
