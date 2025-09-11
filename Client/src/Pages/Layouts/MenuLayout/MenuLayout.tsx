@@ -1,6 +1,6 @@
-import { MenuLayoutContent } from "./MenuLayoutContent";
+import { MenuLayoutContent } from "./MenuLayoutContent/MenuLayoutContent";
 import { MenuLayoutHeader } from "./MenuLayoutHeader/MenuLayoutHeader";
-import { MenuLayoutSidebar } from "./MenuLayoutSidebar";
+import { MenuLayoutSidebar } from "./MenuLayoutSidebar/MenuLayoutSidebar";
 
 interface MenuLayoutProps {
   children: any;
