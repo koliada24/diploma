@@ -8,9 +8,9 @@ export function ExamTemplateListItem({ template }: { template: ExamTemplate }) {
     <ListGroup.Item action>
       <Row>
         <Col xs={3}>{title}</Col>
-        <Col xs={8}>{description}</Col> 
+        <Col xs={8}>{description}</Col>
         <Col xs={1} className="d-flex justify-content-center">{questionCount}</Col>
-      </Row>  
+      </Row>
     </ListGroup.Item>
   );
 }
