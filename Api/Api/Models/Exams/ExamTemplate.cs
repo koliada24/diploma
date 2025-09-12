@@ -10,7 +10,6 @@ namespace Api.Models.Exams
 
         public string Description { get; set; } = string.Empty;
 
-
         public List<QuestionTemplate> Questions { get; set; } = new();
 
         public Guid CreatedById { get; set; }

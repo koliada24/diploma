@@ -14,6 +14,12 @@ export function AddExamTemplateModal({ show, handleHide, addTemplate }: AddExamT
 
   const handleSubmit = () => {
     addTemplate({title, description});
+    onHide();
+  }
+
+  const onHide = () => {
+    setTitle('');
+    setDescription('');
     handleHide();
   }
   
@@ -21,7 +27,7 @@ export function AddExamTemplateModal({ show, handleHide, addTemplate }: AddExamT
     <Modal
       show={show}
       aria-labelledby="contained-modal-title-vcenter"
-      onHide={handleHide}
+      onHide={onHide}
       centered
     >
       <Modal.Header closeButton>
@@ -53,7 +59,7 @@ export function AddExamTemplateModal({ show, handleHide, addTemplate }: AddExamT
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="outline-secondary text-dark" onClick={handleHide}>Cancel</Button>
+        <Button variant="outline-secondary text-dark" onClick={onHide}>Cancel</Button>
         <Button onClick={handleSubmit}>Submit</Button>
       </Modal.Footer>
     </Modal>

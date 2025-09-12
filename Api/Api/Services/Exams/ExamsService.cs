@@ -23,6 +23,7 @@ namespace Api.Services.Exams
             {
                 Id = newExamTemplateId,
                 Title = createExamTemplateDTO.Title,
+                Description = createExamTemplateDTO.Description,
                 CreatedById = userId
             };
 
