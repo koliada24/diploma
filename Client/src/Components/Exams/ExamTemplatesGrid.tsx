@@ -222,15 +222,15 @@ export function ExamTemplatesGrid() {
   return (
     <>
       <ListGroup defaultActiveKey="#link1">
-        <ListGroup.Item className="border-bottom border-dark">
+        <ListGroup.Item>
           <Row className="align-items-center">
-            <Col xs={3} className="border-end border-dark">
+            <Col xs={3} className="fw-semibold">
               Title
             </Col>
-            <Col xs={8} className="border-end border-dark">
+            <Col xs={8} className="fw-semibold">
               Description
             </Col>
-            <Col xs={1} className="d-flex justify-content-center">
+            <Col xs={1} className="d-flex justify-content-center fw-semibold">
               Students
             </Col>
           </Row>
