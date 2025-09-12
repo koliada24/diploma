@@ -1,6 +1,6 @@
 ﻿namespace Api.DTOs.Exams
 {
-    public class CreateExamTemplateDTO
+    public class EditExamTemplateDTO
     {
         public string Title { get; set; } = string.Empty;
 

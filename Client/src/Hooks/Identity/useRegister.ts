@@ -1,8 +1,8 @@
-import axios from './../axios';
-import type { RegisterUserDTO } from '../Models/RegisterUserDTO';
-import config from './../config';
+import axios from '../../axios';
+import type { RegisterUserDTO } from '../../Models/Identity/RegisterUserDTO';
+import config from '../../config';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../Contexts/AuthContext';
+import { useAuth } from '../../Contexts/AuthContext';
 
 interface useRegisterResult {
   handleRegistration: (registerUserDTO: RegisterUserDTO) => Promise<void>;
