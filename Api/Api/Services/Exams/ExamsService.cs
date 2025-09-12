@@ -32,6 +32,25 @@ namespace Api.Services.Exams
             return newExamTemplateId;
         }
 
+        public async Task DeleteExamTemplateAsync(Guid templateId)
+        {
+            var examTemplateToDelete = await _db.ExamTemplates.FirstOrDefaultAsync(x => x.Id == templateId);
+
+            _db.ExamTemplates.Remove(examTemplateToDelete);
+
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task EditExamTemplateAsync(EditExamTemplateDTO createExamTemplateDTO, Guid templateId)
+        {
+            var examTemplateToUpdate = await _db.ExamTemplates.FirstOrDefaultAsync(x => x.Id == templateId);
+
+            examTemplateToUpdate.Title = createExamTemplateDTO.Title;
+            examTemplateToUpdate.Description = createExamTemplateDTO.Description;
+
+            await _db.SaveChangesAsync();
+        }
+
         public async Task<List<GetExamTemplatesDTO>> GetExamTeplatesAsync(Guid userId)
         {
             var examTemplates = await _db.ExamTemplates
@@ -40,6 +59,7 @@ namespace Api.Services.Exams
                 {
                     Id = template.Id,
                     Title = template.Title,
+                    Description = template.Description,
                     QuestionCount = template.Questions.Count
                 })
                 .ToListAsync();

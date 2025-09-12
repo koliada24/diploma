@@ -1,12 +1,22 @@
 import { Button, Form, Modal } from "react-bootstrap";
+import type { CreateExamTemplateDTO } from "../../Models/Exams/CreateExamTemplateDTO";
+import { useState } from "react";
 
 interface AddExamTemplateModalProps {
   show: boolean;
   handleHide: () => void;
-  handleSubmit: () => void;
+  addTemplate: (template: CreateExamTemplateDTO) => Promise<void>;
 }
 
-export function AddExamTemplateModal({ show, handleHide, handleSubmit }: AddExamTemplateModalProps) {
+export function AddExamTemplateModal({ show, handleHide, addTemplate }: AddExamTemplateModalProps) {
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+
+  const handleSubmit = () => {
+    addTemplate({title, description});
+    handleHide();
+  }
+  
   return (
     <Modal
       show={show}
@@ -24,12 +34,20 @@ export function AddExamTemplateModal({ show, handleHide, handleSubmit }: AddExam
 
         <Form.Group className="mb-3" controlId="examtemplateform.title">
           <Form.Label>Title</Form.Label>
-          <Form.Control placeholder="Title" />
+          <Form.Control 
+            onChange={(e) => setTitle(e.target.value)}
+            value={title} 
+            placeholder="Title"
+          />
         </Form.Group>
 
         <Form.Group controlId="examtemplateform.description">
           <Form.Label>Exam Description</Form.Label>
-          <Form.Control placeholder="Description" />
+          <Form.Control
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+            placeholder="Description"
+          />
         </Form.Group>
         
       </Modal.Body>

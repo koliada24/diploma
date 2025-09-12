@@ -1,8 +1,8 @@
-import axios from './../axios';
-import type { LoginUserDTO } from '../Models/LoginUserDTO';
-import config from './../config';
+import axios from '../../axios';
+import type { LoginUserDTO } from '../../Models/Identity/LoginUserDTO';
+import config from '../../config';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../Contexts/AuthContext';
+import { useAuth } from '../../Contexts/AuthContext';
 
 interface useLoginResult {
   handleLogin: (LoginUserDTO: LoginUserDTO) => Promise<void>;

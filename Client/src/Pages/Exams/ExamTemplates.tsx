@@ -3,21 +3,29 @@ import { ExamTemplatesGrid } from "../../Components/Exams/ExamTemplatesGrid";
 import { ExamTemplatesHeader } from "../../Components/Exams/ExamTemplatesHeader";
 import { MenuLayout } from "../Layouts/MenuLayout/MenuLayout";
 import { AddExamTemplateModal } from "../../Components/Exams/AddExamTemplateModal";
+import { useExamTemplates } from "../../Hooks/Exams/useExamTemplates";
 
 export function ExamTemplates() {
   const [showAddExamTemplateModal, setShowAddExamTemplateModal] = useState<boolean>(false);
+
+  const { templates, fetchTemplates, addTemplate, editTemplate, deleteTemplate } = useExamTemplates();
 
   return (
     <MenuLayout>
       <AddExamTemplateModal
         show={showAddExamTemplateModal}
         handleHide={() => setShowAddExamTemplateModal(false)} 
-        handleSubmit={() => setShowAddExamTemplateModal(false)} 
+        addTemplate={addTemplate}
       />
-      <ExamTemplatesHeader 
+      <ExamTemplatesHeader
         handleShowAddExamTemplateModal={() => setShowAddExamTemplateModal(true)}
       />
-      <ExamTemplatesGrid />
+      <ExamTemplatesGrid
+        templates={templates}
+        fetchTemplates={fetchTemplates}
+        editTemplate={editTemplate}
+        deleteTemplate={deleteTemplate}
+      />
     </MenuLayout>
   );
 }
