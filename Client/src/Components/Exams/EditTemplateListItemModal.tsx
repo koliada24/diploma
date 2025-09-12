@@ -41,7 +41,7 @@ export function EditTemplateListItemModal({ template, show, handleHide, handleSu
           <Button variant="danger" onClick={handleSubmit}>Delete</Button>
         </div>
         <div className="d-flex justify-content-end">
-          <Button variant="secondary" className="me-2" onClick={handleHide}>Cancel</Button>
+          <Button variant="outline-secondary text-dark" className="me-2" onClick={handleHide}>Cancel</Button>
           <Button variant="primary" onClick={handleSubmit}>Submit</Button>
         </div>
       </Modal.Footer>

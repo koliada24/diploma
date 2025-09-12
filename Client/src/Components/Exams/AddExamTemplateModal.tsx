@@ -35,7 +35,7 @@ export function AddExamTemplateModal({ show, handleHide, handleSubmit }: AddExam
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleHide}>Cancel</Button>
+        <Button variant="outline-secondary text-dark" onClick={handleHide}>Cancel</Button>
         <Button onClick={handleSubmit}>Submit</Button>
       </Modal.Footer>
     </Modal>
