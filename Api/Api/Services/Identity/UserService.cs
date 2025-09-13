@@ -15,8 +15,30 @@ namespace Api.Services.Identity
             _db = db;
         }
 
-        public async Task<User?> RegisterUserAsync(RegisterUserDTO registerUserDTO)
+        public async Task<User> RegisterUserAsync(RegisterUserDTO registerUserDTO)
         {
+            if (registerUserDTO == null)
+            {
+                throw new ArgumentNullException(nameof(registerUserDTO));
+            }
+
+            if (string.IsNullOrEmpty(registerUserDTO.Username))
+            {
+                throw new ArgumentException("Username required", nameof(registerUserDTO.Username));
+            }
+
+            if (string.IsNullOrEmpty(registerUserDTO.Password))
+            {
+                throw new ArgumentException("Password required", nameof(registerUserDTO.Username));
+            }
+
+            var isUsernameTaken = await _db.Users.AnyAsync(u => u.UserName == registerUserDTO.Username);
+
+            if (isUsernameTaken)
+            {
+                throw new InvalidOperationException("Username is already taken");
+            }
+
             var guid = Guid.NewGuid();
 
             var userToSave = new User
@@ -25,9 +47,16 @@ namespace Api.Services.Identity
                 UserName = registerUserDTO.Username,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerUserDTO.Password)
             };
-            
-            _db.Users.Add(userToSave);
-            await _db.SaveChangesAsync();
+
+            try
+            {
+                _db.Users.Add(userToSave);
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DbUpdateException("An error occurred while saving the user to the database.", ex);
+            }
 
             return userToSave;
         }

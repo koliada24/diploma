@@ -1,6 +1,7 @@
 ﻿using Api.DTOs.Identity;
 using Api.Interfaces.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers
 {
@@ -19,12 +20,31 @@ namespace Api.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] RegisterUserDTO registerUserDTO)
         {
-            var user = await _usersService.RegisterUserAsync(registerUserDTO);
+            try
+            {
+                var user = await _usersService.RegisterUserAsync(registerUserDTO);
 
-            var token = _jwtService.GenerateTokenForUser(user);
-            Response.Cookies.Append("jwt_token", token);
+                var token = _jwtService.GenerateTokenForUser(user);
+                Response.Cookies.Append("jwt_token", token);
 
-            return Ok();
+                return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost("login")]

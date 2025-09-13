@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { useRegister } from "../../Hooks/Identity/useRegister";
 
 export function Register() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { handleRegistration } = useRegister();
+  const { handleRegistration, errorMessage } = useRegister();
 
   const submitRegistration = async () => {
     await handleRegistration({ username, password});
@@ -24,6 +24,12 @@ export function Register() {
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control id='password' type='password' onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
+
+        {errorMessage && (
+          <Alert variant="danger" className="mb-3 text-center">
+            {errorMessage}
+          </Alert>
+        )}
 
         <Button className='mb-3' onClick={submitRegistration}>Register</Button>
         
