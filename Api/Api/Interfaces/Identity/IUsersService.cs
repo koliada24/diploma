@@ -9,8 +9,6 @@ namespace Api.Interfaces.Identity
 
         Task<bool> ValidateUserCredentialsAsync(string userName, string password);
 
-        Task<User?> GetUserByUsernameAsync(string username);
-
-        Task<User?> GetUserByIdAsync(Guid userId);
+        Task<User> GetUserByUsernameAsync(string username);
     }
 }

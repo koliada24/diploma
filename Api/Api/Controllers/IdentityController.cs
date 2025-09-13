@@ -50,19 +50,49 @@ namespace Api.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginUserDTO loginDTO)
         {
-            var isValid = await _usersService.ValidateUserCredentialsAsync(loginDTO.Username, loginDTO.Password);
-
-            if (!isValid)
+            try
             {
-                return Unauthorized();
+                var isValid = await _usersService.ValidateUserCredentialsAsync(loginDTO.Username, loginDTO.Password);
+
+                if (!isValid)
+                {
+                    return Unauthorized();
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
             }
 
-            var user = await _usersService.GetUserByUsernameAsync(loginDTO.Username);
+            try
+            {
+                var user = await _usersService.GetUserByUsernameAsync(loginDTO.Username);
 
-            var token = _jwtService.GenerateTokenForUser(user);
-            Response.Cookies.Append("jwt_token", token);
+                var token = _jwtService.GenerateTokenForUser(user);
+                Response.Cookies.Append("jwt_token", token);
 
-            return Ok();
+                return Ok();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost("logout")]
