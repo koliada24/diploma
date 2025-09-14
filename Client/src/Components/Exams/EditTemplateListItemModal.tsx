@@ -1,7 +1,7 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import type { ExamTemplate } from "../../Models/Exams/ExamTemplate";
 import type { EditExamTemplateDTO } from "../../Models/Exams/EditExamTemplateDTO";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface EditTemplateListItemModalProps {
   template: ExamTemplate;
@@ -14,6 +14,12 @@ interface EditTemplateListItemModalProps {
 export function EditTemplateListItemModal({ template, show, handleHide, editTemplate, deleteTemplate }: EditTemplateListItemModalProps) {
   const [title, setTitle] = useState<string>(template.title);
   const [description, setDescription] = useState<string>(template.description);
+  console.log(template);
+
+  useEffect(() => {
+    setTitle(template.title);
+    setDescription(template.description);
+  }, [template]);
 
   const handleSubmit = async () => {
     await editTemplate(template.id, {title, description});
