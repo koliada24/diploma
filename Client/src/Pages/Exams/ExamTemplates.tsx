@@ -8,7 +8,7 @@ import { useExamTemplates } from "../../Hooks/Exams/useExamTemplates";
 export function ExamTemplates() {
   const [showAddExamTemplateModal, setShowAddExamTemplateModal] = useState<boolean>(false);
 
-  const { templates, fetchTemplates, addTemplate, editTemplate, deleteTemplate } = useExamTemplates();
+  const { templates, fetchTemplates, addTemplate } = useExamTemplates();
 
   return (
     <MenuLayout>
@@ -23,8 +23,6 @@ export function ExamTemplates() {
       <ExamTemplatesGrid
         templates={templates}
         fetchTemplates={fetchTemplates}
-        editTemplate={editTemplate}
-        deleteTemplate={deleteTemplate}
       />
     </MenuLayout>
   );

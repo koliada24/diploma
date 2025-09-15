@@ -2,16 +2,13 @@ import { Col, ListGroup, Row } from "react-bootstrap";
 import { ExamTemplateListItem } from "./ExamTemplateListItem";
 import { useEffect } from "react";
 import type { ExamTemplate } from "../../Models/Exams/ExamTemplate";
-import type { EditExamTemplateDTO } from "../../Models/Exams/EditExamTemplateDTO";
 
 interface ExamTemplatesGridProps {
   templates: ExamTemplate[];
   fetchTemplates: () => Promise<void>;
-  editTemplate: (templateId: string, template: EditExamTemplateDTO) => Promise<void>;
-  deleteTemplate: (templateId: string) => Promise<void>;
 }
 
-export function ExamTemplatesGrid({ templates, fetchTemplates, editTemplate, deleteTemplate }: ExamTemplatesGridProps) {
+export function ExamTemplatesGrid({ templates, fetchTemplates }: ExamTemplatesGridProps) {
   useEffect(() => {
     fetchTemplates();
   }, [])
@@ -34,8 +31,6 @@ export function ExamTemplatesGrid({ templates, fetchTemplates, editTemplate, del
         </ListGroup.Item>
         {templates.map(template => <ExamTemplateListItem 
           template={template}
-          editTemplate={editTemplate}
-          deleteTemplate={deleteTemplate}
         />)}
       </ListGroup>
     </>
