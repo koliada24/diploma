@@ -40,7 +40,7 @@ export function useRegister(): useRegisterResult {
             setErrorMessage("Server error. Please try again later.");
             break;
           default:
-            setErrorMessage("Network error. Check your connection.")
+            setErrorMessage("Network error. Check your connection.");
         }
       }
       else {
