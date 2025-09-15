@@ -13,7 +13,7 @@ export function Login() {
 
   return (
     <div className="center-div">
-      <Form className='d-flex flex-column'>
+      <Form className='d-flex flex-column w-235px'>
 
       <Form.Group className='mb-3'>
         <Form.Label htmlFor='username'>Username</Form.Label>
