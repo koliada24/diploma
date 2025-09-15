@@ -15,5 +15,5 @@ namespace Api.Models.Exams
         public Guid CreatedById { get; set; }
 
         public User CreatedBy { get; set; } = null!;
-    }    
+    }
 }

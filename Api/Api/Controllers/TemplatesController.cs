@@ -30,6 +30,14 @@ namespace Api.Controllers
             return Ok(examTemplates);
         }
 
+        [HttpGet("{templateId}")]
+        public async Task<ActionResult<GetExamTemplatesDTO>> GetExamTemplateById(Guid templateId)
+        {
+            var examTemplate = await _examsService.GetExamTeplatesByIdAsync(templateId);
+
+            return Ok(examTemplate);
+        }
+
         [HttpPut("{templateId}")]
         public async Task<ActionResult> EditExamTemplate([FromBody] EditExamTemplateDTO editExamTemplateDTO, Guid templateId)
         {

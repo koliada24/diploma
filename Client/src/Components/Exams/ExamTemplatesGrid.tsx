@@ -25,7 +25,7 @@ export function ExamTemplatesGrid({ templates, fetchTemplates }: ExamTemplatesGr
               Description
             </Col>
             <Col xs={1} className="d-flex justify-content-center fw-semibold">
-              Students
+              Questions
             </Col>
           </Row>
         </ListGroup.Item>

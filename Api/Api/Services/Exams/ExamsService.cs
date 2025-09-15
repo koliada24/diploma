@@ -67,5 +67,21 @@ namespace Api.Services.Exams
 
             return examTemplates;
         }
+
+        public async Task<GetExamTemplatesDTO> GetExamTeplatesByIdAsync(Guid templateId)
+        {
+            var examTemplate = await _db.ExamTemplates
+                .Where(template => template.Id == templateId)
+                .Select(template => new GetExamTemplatesDTO
+                {
+                    Id = template.Id,
+                    Title = template.Title,
+                    Description = template.Description,
+                    QuestionCount = template.Questions.Count
+                })
+                .FirstAsync();
+
+            return examTemplate;
+        }
     }
 }
