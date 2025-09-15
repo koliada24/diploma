@@ -14,7 +14,6 @@ interface EditTemplateListItemModalProps {
 export function EditTemplateListItemModal({ template, show, handleHide, editTemplate, deleteTemplate }: EditTemplateListItemModalProps) {
   const [title, setTitle] = useState<string>(template.title);
   const [description, setDescription] = useState<string>(template.description);
-  console.log(template);
 
   useEffect(() => {
     setTitle(template.title);

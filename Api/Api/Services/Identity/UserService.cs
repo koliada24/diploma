@@ -75,14 +75,13 @@ namespace Api.Services.Identity
 
             try
             {
-                var matchedUser = await _db.Users.FirstOrDefaultAsync(u => u.UserName == userName);
-
-                if (matchedUser == null)
-                {
-                    throw new InvalidOperationException("User not found");
-                }
+                var matchedUser = await _db.Users.FirstAsync(u => u.UserName == userName);
 
                 return BCrypt.Net.BCrypt.Verify(password, matchedUser.PasswordHash);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException("User not found.", ex);
             }
             catch (DbUpdateException ex)
             {

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { useLogin } from "../../Hooks/Identity/useLogin";
 
 export function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { handleLogin } = useLogin();
+  const { handleLogin, errorMessage } = useLogin();
 
   const submitLogin = async () => {
     await handleLogin({username, password});
@@ -13,7 +13,7 @@ export function Login() {
 
   return (
     <div className="center-div">
-      <Form className='d-flex flex-column'>
+      <Form className='d-flex flex-column w-235px'>
 
       <Form.Group className='mb-3'>
         <Form.Label htmlFor='username'>Username</Form.Label>
@@ -24,6 +24,12 @@ export function Login() {
         <Form.Label htmlFor='password'>Password</Form.Label>
         <Form.Control id='password' type='password' onChange={(e) => setPassword(e.target.value)} />
       </Form.Group>
+
+      {errorMessage && (
+        <Alert variant="danger" className="mb-3 text-center">
+          {errorMessage}
+        </Alert>
+      )}
 
       <Button className='mb-3' onClick={submitLogin}>Login</Button>
       

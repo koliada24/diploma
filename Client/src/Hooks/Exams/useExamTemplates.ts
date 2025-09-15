@@ -21,7 +21,6 @@ export function useExamTemplates(): useExamTemplatesResult {
       const responce = await axios.get<ExamTemplate[]>(`${config.apiUrl}/templates`);
     
       if (responce.status == 200) {
-        console.log(responce.data);
         setTemplates(responce.data);
       }
     }
