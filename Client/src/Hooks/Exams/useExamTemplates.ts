@@ -8,6 +8,7 @@ import type { EditExamTemplateDTO } from "../../Models/Exams/EditExamTemplateDTO
 interface useExamTemplatesResult {
   templates: ExamTemplate[];
   fetchTemplates: () => Promise<void>;
+  getTemplateById: (templateId: string) => Promise<ExamTemplate | undefined>;
   addTemplate: (template: CreateExamTemplateDTO) => Promise<void>;
   editTemplate: (templateId: string, template: EditExamTemplateDTO) => Promise<void>;
   deleteTemplate: (templateId: string) => Promise<void>;
@@ -26,6 +27,19 @@ export function useExamTemplates(): useExamTemplatesResult {
     }
     catch {
       // TODO: handle failed responce
+    }
+  };
+
+  const getTemplateById = async (templateId: string): Promise<ExamTemplate | undefined> => {
+    try {
+      const responce = await axios.get<ExamTemplate>(`${config.apiUrl}/templates/${templateId}`);
+    
+      if (responce.status == 200) {
+        return responce.data;
+      }
+    }
+    catch {
+      return;
     }
   };
 
@@ -71,6 +85,7 @@ export function useExamTemplates(): useExamTemplatesResult {
   return {
     templates: templates,
     fetchTemplates: fetchTemplates,
+    getTemplateById: getTemplateById,
     addTemplate: addTemplate,
     editTemplate: editTemplate,
     deleteTemplate: deleteTemplate
