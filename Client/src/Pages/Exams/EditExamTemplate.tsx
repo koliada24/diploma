@@ -3,6 +3,7 @@ import { MenuLayout } from "../Layouts/MenuLayout/MenuLayout";
 import { Button, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useExamTemplates } from "../../Hooks/Exams/useExamTemplates";
+import { ConfirmDeletionModal } from "./ConfirmDeletionModal";
 
 export function EditExamTemplate() {
   const { id } = useParams<{id: string}>();
@@ -12,6 +13,7 @@ export function EditExamTemplate() {
   const [title, setTitle] = useState<string>('');
   const [newTitle, setNewTitle] = useState<string>('');
   const [newDescription, setNewDescription] = useState<string>('');
+  const [showConfirmDeletionModal, setShowConfirmDeletionModal] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +39,11 @@ export function EditExamTemplate() {
 
   return (
     <MenuLayout>
+        <ConfirmDeletionModal 
+          show={showConfirmDeletionModal}
+          handleHide={() => setShowConfirmDeletionModal(false)}
+          handleConfirm={handleDelete}
+        />
         <h4>Editing {title}</h4>
         <hr/>
 
@@ -60,7 +67,7 @@ export function EditExamTemplate() {
 
         <div className="d-flex justify-content-between">
           <div className="d-flex justify-content-start">
-            <Button variant="danger" onClick={handleDelete}>Delete</Button>
+            <Button variant="danger" onClick={() => setShowConfirmDeletionModal(true)}>Delete</Button>
           </div>
 
           <div className="d-flex justify-content-end">
