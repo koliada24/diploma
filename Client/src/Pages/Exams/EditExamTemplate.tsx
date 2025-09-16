@@ -6,7 +6,7 @@ import { useExamTemplates } from "../../Hooks/Exams/useExamTemplates";
 
 export function EditExamTemplate() {
   const { id } = useParams<{id: string}>();
-  const { getTemplateById } = useExamTemplates();
+  const { getTemplateById, deleteTemplate, editTemplate } = useExamTemplates();
   const navigate = useNavigate();
   
   const [title, setTitle] = useState<string>('');
@@ -26,11 +26,13 @@ export function EditExamTemplate() {
   }, []);
 
   const handleSubmit = async () => {
-    //
+    await editTemplate(id ?? '', { title: newTitle, description: newDescription });
+    navigate('/templates');
   }
   
   const handleDelete = async () => {
-    //
+    await deleteTemplate(id ?? '');
+    navigate('/templates');
   }
 
   return (
