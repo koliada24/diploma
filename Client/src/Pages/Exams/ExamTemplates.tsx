@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ExamTemplatesGrid } from "../../Components/Exams/ExamTemplatesGrid";
-import { ExamTemplatesHeader } from "../../Components/Exams/ExamTemplatesHeader";
+import { ExamTemplatesGrid } from "../../Components/Exams/ExamTemplatesGrid/ExamTemplatesGrid";
+import { ExamTemplatesHeader } from "../../Components/Exams/ExamTemplatesGrid/ExamTemplatesHeader";
 import { MenuLayout } from "../Layouts/MenuLayout/MenuLayout";
-import { AddExamTemplateModal } from "../../Components/Exams/AddExamTemplateModal";
+import { AddExamTemplateModal } from "../../Components/Exams/ExamTemplatesGrid/AddExamTemplateModal";
 import { useExamTemplates } from "../../Hooks/Exams/useExamTemplates";
 
 export function ExamTemplates() {

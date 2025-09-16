@@ -3,7 +3,7 @@ import { MenuLayout } from "../Layouts/MenuLayout/MenuLayout";
 import { Button, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useExamTemplates } from "../../Hooks/Exams/useExamTemplates";
-import { ConfirmDeletionModal } from "./ConfirmDeletionModal";
+import { ConfirmDeletionModal } from "../../Components/Exams/EditExamTemplate/General/ConfirmDeletionModal";
 
 export function EditExamTemplate() {
   const { id } = useParams<{id: string}>();

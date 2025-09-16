@@ -1,7 +1,7 @@
 import { Col, ListGroup, Row } from "react-bootstrap";
 import { ExamTemplateListItem } from "./ExamTemplateListItem";
 import { useEffect } from "react";
-import type { ExamTemplate } from "../../Models/Exams/ExamTemplate";
+import type { ExamTemplate } from "../../../Models/Exams/ExamTemplate";
 
 interface ExamTemplatesGridProps {
   templates: ExamTemplate[];

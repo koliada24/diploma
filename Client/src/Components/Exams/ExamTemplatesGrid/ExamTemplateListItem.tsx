@@ -1,5 +1,5 @@
 import { Col, ListGroup, Row } from "react-bootstrap";
-import type { ExamTemplate } from "../../Models/Exams/ExamTemplate";
+import type { ExamTemplate } from "../../../Models/Exams/ExamTemplate";
 import { useNavigate } from "react-router-dom";
 
 interface ExamTemplateListItemProps {

@@ -1,5 +1,5 @@
 import { Button, Form, Modal } from "react-bootstrap";
-import type { CreateExamTemplateDTO } from "../../Models/Exams/CreateExamTemplateDTO";
+import type { CreateExamTemplateDTO } from "../../../Models/Exams/CreateExamTemplateDTO";
 import { useState } from "react";
 
 interface AddExamTemplateModalProps {
