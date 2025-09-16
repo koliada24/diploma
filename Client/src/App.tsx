@@ -6,7 +6,7 @@ import { Home } from './Pages/Home';
 import { ProtectedRoute } from './Components/ProtectedRoute';
 import { AuthProvider } from './Contexts/AuthContext';
 import { ExamTemplates } from './Pages/Exams/ExamTemplates';
-import { EditExamTemplate } from './Pages/Exams/EditExamTemplate';
+import { EditExamTemplate } from './Pages/Exams/EditExamTemplate/EditExamTemplate';
 
 function App() {
   return (
