@@ -4,6 +4,7 @@ import { EditExamTemplateGeneral } from "./EditExamTemplateGeneral";
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useExamTemplates } from "../../../Hooks/Exams/useExamTemplates";
+import { useEditExamTemplate } from "../../../Hooks/Exams/useEditExamTemplate";
 
 enum EditExamTemplateTabs {
   General,
@@ -12,19 +13,7 @@ enum EditExamTemplateTabs {
 
 export function EditExamTemplate() {
   const { id } = useParams<{id: string}>();
-  const { getTemplateById } = useExamTemplates();
-  
-  const [title, setTitle] = useState<string>('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const template = await getTemplateById(id ?? ' '); 
-      if (template) {
-        setTitle(template.title);
-      }
-    };
-    fetchData();
-  }, []);
+  const { currentTitle, newTitle, setNewTitle, newDescription, setNewDescription } = useEditExamTemplate({id: id ?? ''});
 
   const [activeTab, setActiveTab] = useState<EditExamTemplateTabs>(EditExamTemplateTabs.General);
 
@@ -37,7 +26,12 @@ export function EditExamTemplate() {
   const renderTabContent = (activeTab: EditExamTemplateTabs) => {
     switch (activeTab as EditExamTemplateTabs) {
       case EditExamTemplateTabs.General:
-        return <EditExamTemplateGeneral />;
+        return <EditExamTemplateGeneral
+          newTitle={newTitle}
+          setNewTitle={setNewTitle}
+          newDescription={newDescription}
+          setNewDescription={setNewDescription}
+        />;
       case EditExamTemplateTabs.Questions:
         return <>EditExamTemplateTabs.Questions</>;
       default:
@@ -48,7 +42,7 @@ export function EditExamTemplate() {
   return (
     <>
       <MenuLayout>
-        <h4 className="mb-3">Editing {title}</h4>
+        <h4 className="mb-3">Editing {currentTitle}</h4>
         
 
         <Nav
