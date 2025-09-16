@@ -9,7 +9,6 @@ export function EditExamTemplateGeneral() {
   const { getTemplateById, deleteTemplate, editTemplate } = useExamTemplates();
   const navigate = useNavigate();
   
-  const [title, setTitle] = useState<string>('');
   const [newTitle, setNewTitle] = useState<string>('');
   const [newDescription, setNewDescription] = useState<string>('');
   const [showConfirmDeletionModal, setShowConfirmDeletionModal] = useState<boolean>(false);
@@ -18,7 +17,6 @@ export function EditExamTemplateGeneral() {
     const fetchData = async () => {
       const template = await getTemplateById(id ?? ' '); 
       if (template) {
-        setTitle(template.title);
         setNewTitle(template.title);
         setNewDescription(template.description);
       }
