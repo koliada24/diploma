@@ -1,28 +1,21 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useExamTemplates } from "../../../Hooks/Exams/useExamTemplates";
 import { ConfirmDeletionModal } from "../../../Components/Exams/EditExamTemplate/General/ConfirmDeletionModal";
 
-export function EditExamTemplateGeneral() {
-  const { id } = useParams<{id: string}>();
-  const { getTemplateById, deleteTemplate, editTemplate } = useExamTemplates();
-  const navigate = useNavigate();
-  
-  const [newTitle, setNewTitle] = useState<string>('');
-  const [newDescription, setNewDescription] = useState<string>('');
-  const [showConfirmDeletionModal, setShowConfirmDeletionModal] = useState<boolean>(false);
+interface EditExamTemplateGeneralProps {
+  newTitle: string;
+  setNewTitle: (title: string) => void;
+  newDescription: string;
+  setNewDescription: (title: string) => void;
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const template = await getTemplateById(id ?? ' '); 
-      if (template) {
-        setNewTitle(template.title);
-        setNewDescription(template.description);
-      }
-    };
-    fetchData();
-  }, []);
+export function EditExamTemplateGeneral({ newTitle, setNewTitle, newDescription, setNewDescription }: EditExamTemplateGeneralProps) {
+  const { id } = useParams<{id: string}>();
+  const { deleteTemplate, editTemplate } = useExamTemplates();
+  const navigate = useNavigate();
+  const [showConfirmDeletionModal, setShowConfirmDeletionModal] = useState<boolean>(false);
 
   const handleSubmit = async () => {
     await editTemplate(id ?? '', { title: newTitle, description: newDescription });
