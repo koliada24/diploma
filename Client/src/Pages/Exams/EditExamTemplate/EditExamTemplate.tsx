@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MenuLayout } from "../../Layouts/MenuLayout/MenuLayout";
 import { EditExamTemplateGeneral } from "./EditExamTemplateGeneral";
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { useExamTemplates } from "../../../Hooks/Exams/useExamTemplates";
-import { useEditExamTemplate } from "../../../Hooks/Exams/useEditExamTemplate";
+import { useEditExamTemplateGeneral } from "../../../Hooks/Exams/useEditExamTemplateGeneral";
+import { EditExamTemplateQuestions } from "./EditExamTemplateQuestions";
 
 enum EditExamTemplateTabs {
   General,
@@ -13,7 +13,7 @@ enum EditExamTemplateTabs {
 
 export function EditExamTemplate() {
   const { id } = useParams<{id: string}>();
-  const { currentTitle, newTitle, setNewTitle, newDescription, setNewDescription } = useEditExamTemplate({id: id ?? ''});
+  const { currentTitle, newTitle, setNewTitle, newDescription, setNewDescription } = useEditExamTemplateGeneral({id: id ?? ''});
 
   const [activeTab, setActiveTab] = useState<EditExamTemplateTabs>(EditExamTemplateTabs.General);
 
@@ -33,7 +33,7 @@ export function EditExamTemplate() {
           setNewDescription={setNewDescription}
         />;
       case EditExamTemplateTabs.Questions:
-        return <>EditExamTemplateTabs.Questions</>;
+        return <EditExamTemplateQuestions />
       default:
         return <>Unknown page</>;
     }

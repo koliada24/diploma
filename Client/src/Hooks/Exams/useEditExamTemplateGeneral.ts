@@ -13,7 +13,7 @@ interface useEditExamTemplateResult {
   setNewDescription: (title: string) => void;
 }
 
-export function useEditExamTemplate({ id }: useEditExamTemplateProps): useEditExamTemplateResult {
+export function useEditExamTemplateGeneral({ id }: useEditExamTemplateProps): useEditExamTemplateResult {
   const [currentTitle, setCurrentTitle] = useState<string>('');
   const [newTitle, setNewTitle] = useState<string>('');
   const [newDescription, setNewDescription] = useState<string>('');
