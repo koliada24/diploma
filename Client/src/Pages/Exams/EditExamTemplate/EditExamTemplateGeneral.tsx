@@ -53,7 +53,7 @@ export function EditExamTemplateGeneral({ newTitle, setNewTitle, newDescription,
         />
       </Form.Group>
 
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-3">
         <div className="d-flex justify-content-start">
           <Button variant="danger" onClick={() => setShowConfirmDeletionModal(true)}>Delete</Button>
         </div>
