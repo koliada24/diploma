@@ -1,8 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
-import { useState } from "react";
-import { useExamTemplates } from "../../../Hooks/Exams/useExamTemplates";
-import { ConfirmDeletionModal } from "../../../Components/Exams/EditExamTemplate/General/ConfirmDeletionModal";
+import { Form } from "react-bootstrap";
 
 interface EditExamTemplateGeneralProps {
   newTitle: string;
@@ -12,29 +8,8 @@ interface EditExamTemplateGeneralProps {
 }
 
 export function EditExamTemplateGeneral({ newTitle, setNewTitle, newDescription, setNewDescription }: EditExamTemplateGeneralProps) {
-  const { id } = useParams<{id: string}>();
-  const { deleteTemplate, editTemplate } = useExamTemplates();
-  const navigate = useNavigate();
-  const [showConfirmDeletionModal, setShowConfirmDeletionModal] = useState<boolean>(false);
-
-  const handleSubmit = async () => {
-    await editTemplate(id ?? '', { title: newTitle, description: newDescription });
-    navigate('/templates');
-  }
-  
-  const handleDelete = async () => {
-    await deleteTemplate(id ?? '');
-    navigate('/templates');
-  }
-
   return (
     <>
-      <ConfirmDeletionModal 
-        show={showConfirmDeletionModal}
-        handleHide={() => setShowConfirmDeletionModal(false)}
-        handleConfirm={handleDelete}
-      />
-
       <Form.Group className="mb-3" controlId="examtemplateform.title">
         <Form.Label>Title</Form.Label>
         <Form.Control
@@ -52,25 +27,6 @@ export function EditExamTemplateGeneral({ newTitle, setNewTitle, newDescription,
           onChange={(e) => setNewDescription(e.target.value)}
         />
       </Form.Group>
-
-      <div className="d-flex justify-content-between mb-3">
-        <div className="d-flex justify-content-start">
-          <Button variant="danger" onClick={() => setShowConfirmDeletionModal(true)}>Delete</Button>
-        </div>
-
-        <div className="d-flex justify-content-end">
-          <Button 
-            variant="outline-secondary text-dark"
-            className="me-2"
-            onClick={() => navigate('/templates')}
-          >Cancel</Button>
-          
-          <Button
-            variant="primary"
-            onClick={handleSubmit}
-          >Submit</Button>
-        </div>
-      </div>
     </>
   );
 }

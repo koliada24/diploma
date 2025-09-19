@@ -3,6 +3,7 @@ import { EditExamTemplateGeneral } from "./EditExamTemplateGeneral";
 import { useParams } from "react-router-dom";
 import { useEditExamTemplateGeneral } from "../../../Hooks/Exams/useEditExamTemplateGeneral";
 import { EditExamTemplateQuestions } from "./EditExamTemplateQuestions";
+import { EditExamTemaplateFooter } from "./EditExamTemaplateFooter";
 
 export function EditExamTemplate() {
   const { id } = useParams<{id: string}>();
@@ -19,6 +20,10 @@ export function EditExamTemplate() {
           setNewDescription={setNewDescription}
         />
         <EditExamTemplateQuestions />
+        <EditExamTemaplateFooter
+          newTitle={newTitle}
+          newDescription={newDescription}
+        />
       </MenuLayout>
     </>
   );
