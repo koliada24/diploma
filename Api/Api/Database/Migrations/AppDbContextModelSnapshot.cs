@@ -22,31 +22,6 @@ namespace Api.Database.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Api.Models.Exams.AnswerTemplate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("boolean");
-
-                    b.Property<int?>("QuestionTemplateId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionTemplateId");
-
-                    b.ToTable("AnswerTemplates");
-                });
-
             modelBuilder.Entity("Api.Models.Exams.ExamTemplate", b =>
                 {
                     b.Property<Guid>("Id")
@@ -86,11 +61,18 @@ namespace Api.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("QuestionType")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ExamTemplateId");
 
                     b.ToTable("QuestionTemplates");
+
+                    b.HasDiscriminator<int>("QuestionType");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Api.Models.Identity.User", b =>
@@ -115,11 +97,44 @@ namespace Api.Database.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Api.Models.Exams.AnswerTemplate", b =>
+            modelBuilder.Entity("Api.Models.Exams.LongAnswerQuestionTemplate", b =>
                 {
-                    b.HasOne("Api.Models.Exams.QuestionTemplate", null)
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionTemplateId");
+                    b.HasBaseType("Api.Models.Exams.QuestionTemplate");
+
+                    b.HasDiscriminator().HasValue(1);
+                });
+
+            modelBuilder.Entity("Api.Models.Exams.MultipleChoiceQuestionTemplate", b =>
+                {
+                    b.HasBaseType("Api.Models.Exams.QuestionTemplate");
+
+                    b.Property<string>("AnswerOptions")
+                        .IsRequired()
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("text")
+                        .HasColumnName("AnswerOptions");
+
+                    b.HasDiscriminator().HasValue(2);
+                });
+
+            modelBuilder.Entity("Api.Models.Exams.ShortAnswerQuestionTemplate", b =>
+                {
+                    b.HasBaseType("Api.Models.Exams.QuestionTemplate");
+
+                    b.HasDiscriminator().HasValue(0);
+                });
+
+            modelBuilder.Entity("Api.Models.Exams.SingleChoiceQuestionTemplate", b =>
+                {
+                    b.HasBaseType("Api.Models.Exams.QuestionTemplate");
+
+                    b.Property<string>("AnswerOptions")
+                        .IsRequired()
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("text")
+                        .HasColumnName("AnswerOptions");
+
+                    b.HasDiscriminator().HasValue(3);
                 });
 
             modelBuilder.Entity("Api.Models.Exams.ExamTemplate", b =>
@@ -135,19 +150,16 @@ namespace Api.Database.Migrations
 
             modelBuilder.Entity("Api.Models.Exams.QuestionTemplate", b =>
                 {
-                    b.HasOne("Api.Models.Exams.ExamTemplate", null)
+                    b.HasOne("Api.Models.Exams.ExamTemplate", "ExamTemplate")
                         .WithMany("Questions")
                         .HasForeignKey("ExamTemplateId");
+
+                    b.Navigation("ExamTemplate");
                 });
 
             modelBuilder.Entity("Api.Models.Exams.ExamTemplate", b =>
                 {
                     b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("Api.Models.Exams.QuestionTemplate", b =>
-                {
-                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("Api.Models.Identity.User", b =>

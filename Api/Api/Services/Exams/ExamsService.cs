@@ -52,11 +52,11 @@ namespace Api.Services.Exams
             await _db.SaveChangesAsync();
         }
 
-        public async Task<List<GetExamTemplatesDTO>> GetExamTeplatesAsync(Guid userId)
+        public async Task<List<GetExamTemplateDTO>> GetExamTeplatesAsync(Guid userId)
         {
             var examTemplates = await _db.ExamTemplates
                 .Where(template => template.CreatedById == userId)
-                .Select(template => new GetExamTemplatesDTO
+                .Select(template => new GetExamTemplateDTO
                 {
                     Id = template.Id,
                     Title = template.Title,
@@ -68,11 +68,11 @@ namespace Api.Services.Exams
             return examTemplates;
         }
 
-        public async Task<GetExamTemplatesDTO> GetExamTeplatesByIdAsync(Guid templateId)
+        public async Task<GetExamTemplateDTO> GetExamTeplatesByIdAsync(Guid templateId)
         {
             var examTemplate = await _db.ExamTemplates
                 .Where(template => template.Id == templateId)
-                .Select(template => new GetExamTemplatesDTO
+                .Select(template => new GetExamTemplateDTO
                 {
                     Id = template.Id,
                     Title = template.Title,

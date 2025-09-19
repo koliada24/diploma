@@ -1,6 +1,6 @@
 ﻿namespace Api.DTOs.Exams
 {
-    public class GetExamTemplatesDTO
+    public class GetExamTemplateDTO
     {
         public Guid Id { get; set; } = Guid.Empty;
 

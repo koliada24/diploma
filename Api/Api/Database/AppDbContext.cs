@@ -1,6 +1,8 @@
 ﻿using Api.Models.Exams;
 using Api.Models.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Text.Json;
 
 namespace Api.Database
 {
@@ -11,8 +13,6 @@ namespace Api.Database
         public DbSet<ExamTemplate> ExamTemplates { get; set; }
 
         public DbSet<QuestionTemplate> QuestionTemplates { get; set; }
-
-        public DbSet<AnswerTemplate> AnswerTemplates { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -38,15 +38,32 @@ namespace Api.Database
             modelBuilder.Entity<QuestionTemplate>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.HasDiscriminator<QuestionType>("QuestionType")
+                    .HasValue<ShortAnswerQuestionTemplate>(QuestionType.ShortAnswer)
+                    .HasValue<LongAnswerQuestionTemplate>(QuestionType.LongAnswer)
+                    .HasValue<SingleChoiceQuestionTemplate>(QuestionType.SingleChoice)
+                    .HasValue<MultipleChoiceQuestionTemplate>(QuestionType.MultipleChoice);
                 entity.Property(e => e.QuestionText).IsRequired();
             });
 
-            modelBuilder.Entity<AnswerTemplate>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Text).IsRequired();
-                entity.Property(e => e.IsCorrect).IsRequired();
-            });
+            var answerOptionsConverter = new ValueConverter<List<AnswerOption>, string>(
+                v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
+                v => string.IsNullOrEmpty(v)
+                    ? new List<AnswerOption>()
+                    : JsonSerializer.Deserialize<List<AnswerOption>>(v, (JsonSerializerOptions?)null)!
+            );
+
+            modelBuilder.Entity<SingleChoiceQuestionTemplate>()
+                .Property(e => e.AnswerOptions)
+                .HasConversion(answerOptionsConverter)
+                .HasColumnType("text")
+                .HasColumnName("AnswerOptions");
+
+            modelBuilder.Entity<MultipleChoiceQuestionTemplate>()
+                .Property(e => e.AnswerOptions)
+                .HasConversion(answerOptionsConverter)
+                .HasColumnType("text")
+                .HasColumnName("AnswerOptions");
         }
     }
 }

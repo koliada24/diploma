@@ -1,11 +1,21 @@
 ﻿namespace Api.Models.Exams
 {
-    public class QuestionTemplate
+    public enum QuestionType
+    {
+        ShortAnswer,
+        LongAnswer,
+        MultipleChoice,
+        SingleChoice,
+    }
+
+    public abstract class QuestionTemplate
     {
         public int Id { get; set; }
 
         public string QuestionText { get; set; } = string.Empty;
 
-        public List<AnswerTemplate> Answers { get; set; } = new();
+        public QuestionType QuestionType { get; private set; }
+
+        public ExamTemplate? ExamTemplate { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetExamTemplatesDTO>>> GetExamTemplates()
+        public async Task<ActionResult<List<GetExamTemplateDTO>>> GetExamTemplates()
         {
             var examTemplates = await _examsService.GetExamTeplatesAsync(UserId);
 
@@ -31,7 +31,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("{templateId}")]
-        public async Task<ActionResult<GetExamTemplatesDTO>> GetExamTemplateById(Guid templateId)
+        public async Task<ActionResult<GetExamTemplateDTO>> GetExamTemplateById(Guid templateId)
         {
             var examTemplate = await _examsService.GetExamTeplatesByIdAsync(templateId);
 
