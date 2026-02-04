@@ -22,7 +22,19 @@
 - As ***student*** I want to finish ***tests*** I took
 
 ### Decomposition
-1) Account Service (account creation, login, logout, store accounts info)
-2) Templates Service (CRUD test templates, question, store test templates info)
-3) Test proceccing service (for active tests: temporary stores info about student answers until test is finished, after finishing sends answer to the )
-4) Tests store service (stores information about finished tests)
+1) Accounts Service
+2) Templates Service
+3) Test proceccing service
+4) Tests store service
+
+### Accounts service
+Stores accounts credentials, responsible for creating and loggin to accounts
+
+### Templates Service
+Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
+
+### Test proceccing service
+Temporaly stores answers of tests that are currently taken by the students. Potentially the most loaded service. Saves files of the answers for some type of questions (code questions, diagram questions). Need to be fast
+
+### Tests store service
+Contains data about all the taken tests, results. Works with a huge amount of data
