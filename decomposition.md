@@ -28,7 +28,7 @@
 4) Tests store service
 
 ### Accounts service
-Stores accounts credentials, responsible for creating and loggin to accounts
+Auth (login, logout, refresh, register) and Public Profiles (listUsers, updateUsers, deleteUsers) operations.
 
 ### Templates Service
 Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
