@@ -30,10 +30,10 @@
 ### Accounts service
 Auth (login, logout, refresh, register) and Public Profiles (listUsers, updateUsers, deleteUsers) operations.
 
-### Templates Service
+### Tests Templates Service
 Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
 
-### Test proceccing service
+### Tests proceccing service
 Temporaly stores answers of tests that are currently taken by the students. Potentially the most loaded service. Saves files of the answers for some type of questions (code questions, diagram questions). Need to be fast
 
 ### Tests store service
