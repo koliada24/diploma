@@ -1,3 +1,8 @@
+# Tests Templates Service
+
+### Description
+Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
+
 ### Endpoints
 - Create template
 - Get all templates for current user
@@ -30,14 +35,12 @@ DiagramQuestion: -
 For create/update operatioins: we keep the certain type of the question untill saving it to db.
 For get operations, we retreive the questions in the form of JSON and convert them only on the frontend part. This is done to reduce logic related to conversion to the concrete type and can be done because we do not perform anything questiontype-sensitive during get operations.
 
-### Description
-Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
-
 ### Analysis
-Service does not nesessary need to be fast, does not work with a large data, is not under high load. The DB choice will be MS SQL (provides data consistency), MinIO (self-hosted Blob storage for files, which can be easily switched to Amazon S3 later)
+No obvious critical condinitons, using default stack
 
 ### Tech Stack
 Language: C#
-Architecture: DDD, CQRS (Logical implementation with single DB)
+
+Architecture: DDD
+
 Database: MS SQL
-File storage: MinIO (temporary)

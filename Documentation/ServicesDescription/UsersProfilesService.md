@@ -1,3 +1,8 @@
+# Users Profiles Service
+
+### Description
+Stores public profiles info of users and user groups
+
 ### Endpoints
 - Create profile
 - Update profile
@@ -13,13 +18,12 @@
 - Profile: userID, first name, last name, email
 - StudentsGroup: groupID, group name, description, students, createdBy
 
-### Description
-Stores public profiles info of users and user groups
-
 ### Analysis
-Low-medium load, does not required high response speed. Gonna use simple 
+No obvious critical condinitons, using default stack
 
 ### Tech Stack
 Language: C#
+
 Architecture: DDD
+
 Database: MS SQL
