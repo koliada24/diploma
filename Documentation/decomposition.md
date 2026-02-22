@@ -23,10 +23,10 @@
 
 ### Decomposition
 1) Authentication Service
-1) User Profiles service
+1) Users Profiles Service
 2) Tests Templates Service
-3) Tests Proceccing service
-4) Tests store service
+3) Tests Proceccing Service
+4) Tests store Service
 
 ### Authentication Service
 Auth (login, logout, refresh, register)
