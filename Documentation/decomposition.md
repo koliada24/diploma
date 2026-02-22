@@ -22,9 +22,10 @@
 - As ***student*** I want to finish ***tests*** I took
 
 ### Decomposition
-1) Accounts Service
-2) Templates Service
-3) Test proceccing service
+1) Authentication Service
+1) User Profiles service
+2) Tests Templates Service
+3) Tests Proceccing service
 4) Tests store service
 
 ### Authentication Service
@@ -34,10 +35,10 @@ Stores credentials (userIDs, logins, password hashes), issues tokens
 ### User Profiles service
 Public Profiles (listUsers, updateUsers, deleteUsers)
 
-### Test Templates Service
+### Tests Templates Service
 Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
 
-### Test proceccing service
+### Tests Proceccing service
 Temporaly stores answers of tests that are currently taken by the students. Potentially the most loaded service. Saves files of the answers for some type of questions (code questions, diagram questions). Need to be fast
 
 ### Tests store service
