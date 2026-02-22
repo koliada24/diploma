@@ -27,14 +27,18 @@
 3) Test proceccing service
 4) Tests store service
 
-### Accounts service
-Auth (login, logout, refresh, register) and Public Profiles (listUsers, updateUsers, deleteUsers) operations.
+### Authentication Service
+Auth (login, logout, refresh, register)
+Stores credentials (userIDs, logins, password hashes), issues tokens 
 
-### Tests Templates Service
+### User Profiles service
+Public Profiles (listUsers, updateUsers, deleteUsers)
+
+### Test Templates Service
 Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
 
-### Tests proceccing service
+### Test proceccing service
 Temporaly stores answers of tests that are currently taken by the students. Potentially the most loaded service. Saves files of the answers for some type of questions (code questions, diagram questions). Need to be fast
 
 ### Tests store service
-Contains data about all the taken tests, results. Works with a huge amount of data
+Contains data about all the taken tests, results. Works with a huge amount of data.
