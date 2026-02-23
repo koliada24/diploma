@@ -1,7 +1,7 @@
 # Tests Proceccing Service
 
 ### Description
-Temporaly stores answers of tests that are currently taken by the students. Potentially the most loaded service. Saves files of the answers for some type of questions (code questions, diagram questions). Need to be fast.
+Temporaly stores answers of tests that are currently taken by the students. 
 
 ### Endpoints
 - Start test (as teacher)
@@ -16,7 +16,7 @@ Temporaly stores answers of tests that are currently taken by the students. Pote
 TestId, Answers, FinishTime, StudentId
 
 ### Analysis
-High load, need to be fast, temporary storage
+Potentially the most loaded service. Saves files of the answers for some type of questions (code questions, diagram questions). Need to be fast.
 
 ### Tech Stack
 Language: C#
@@ -24,3 +24,5 @@ Language: C#
 Architecture: DDD
 
 Database: Redis
+
+File (Blob) storage: MinIO (can be later changed to AWS S3)
