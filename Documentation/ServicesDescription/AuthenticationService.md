@@ -9,7 +9,8 @@ Stores users credentials, responsible for registering, login, authentication, et
 - Issue JWT
 
 ### Domain models
-
+- UserCredentials
+UserID, Login, PasswordHash
 
 ### Analysis
 No obvious critical condinitons, using default stack
