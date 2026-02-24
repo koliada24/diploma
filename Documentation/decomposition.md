@@ -39,7 +39,7 @@ Public Profiles (listUsers, updateUsers, deleteUsers)
 Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
 
 ### Tests Proceccing Service
-Temporaly stores answers of tests that are currently taken by the students. Potentially the most loaded service. Saves files of the answers for some type of questions (code questions, diagram questions). Need to be fast
+Temporaly stores answers of tests that are currently taken by the students. 
 
 ### Tests Store Service
-Contains data about all the taken tests, results. Works with a huge amount of data.
+Contains data about all the taken tests, results.
