@@ -4,6 +4,11 @@
 Contains data about all the taken tests, results.
 
 ### Endpoints
+- Save student answer
+- Get tests for teacher
+- Get answers for tests
+- Get student answer info
+- Get certain answer
 
 ### Domain models
 
