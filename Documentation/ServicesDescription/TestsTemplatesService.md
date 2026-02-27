@@ -1,4 +1,4 @@
-# Tests Templates Service
+# Tests Templates Servic
 
 ### Description
 Stores information about test templates. Responsible for CRUD operations with test templates, questions in it.
