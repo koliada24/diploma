@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Authentication/">
+    <Project Path="Services/Authentication/Authentication.API/Authentication.API.csproj" Id="3fa11ea4-75ba-467e-9d53-83ca171ef610" />
+  </Folder>
+</Solution>

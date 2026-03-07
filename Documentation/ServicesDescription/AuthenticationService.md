@@ -6,6 +6,7 @@ Stores users credentials, responsible for registering, login, authentication, et
 ### Endpoints
 - Register
 - Login
+- Logout
 - Issue JWT
 
 ### Domain models
