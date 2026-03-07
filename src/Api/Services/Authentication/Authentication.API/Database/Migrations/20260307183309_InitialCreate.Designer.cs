@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Authentication.API.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260307142748_InitialCreate")]
+    [Migration("20260307183309_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -30,10 +30,6 @@ namespace Authentication.API.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("AccessToken")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Login")
                         .IsRequired()

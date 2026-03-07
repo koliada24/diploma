@@ -18,7 +18,6 @@ namespace Authentication.API.Database
                 entity.HasKey(e => e.Id);
                 entity.HasIndex(e => e.Login).IsUnique();
                 entity.Property(e => e.PasswordHash).IsRequired();
-                entity.Property(e => e.AccessToken).IsRequired();
             });
         }
     }

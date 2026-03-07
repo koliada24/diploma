@@ -28,10 +28,6 @@ namespace Authentication.API.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AccessToken")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("text");
