@@ -9,6 +9,7 @@ namespace Authentication.API.Services
     public interface IUserPrivateProfilesService
     {
         public Task<UserPrivateProfile> RegisterUserAsync(RegisterRequest request);
+        public Task<UserPrivateProfile> ValidateCredentialsAndReturnProfileAsync(LoginRequest request);
     }
 
     public class UserPrivateProfilesService : IUserPrivateProfilesService
@@ -57,6 +58,33 @@ namespace Authentication.API.Services
             await _db.SaveChangesAsync();
 
             return user;
+        }
+
+        public async Task<UserPrivateProfile> ValidateCredentialsAndReturnProfileAsync(LoginRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException("Invalid request");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Login) || string.IsNullOrWhiteSpace(request.Password))
+            {
+                throw new ArgumentException("Login and password are required");
+            }
+
+            var matchedUser = await _db.UserPrivateProfiles.FirstOrDefaultAsync(x => x.Login == request.Login);
+            if (matchedUser == null)
+            {
+                throw new InvalidOperationException("User does not exist or password is incorrect");
+            }
+
+            var isPasswordCorrect = PasswordUtils.ValidatePassword(request.Password, matchedUser.PasswordHash);
+            if (!isPasswordCorrect)
+            {
+                throw new InvalidOperationException("User does not exist or password is incorrect");
+            }
+
+            return matchedUser;
         }
     }
 }

@@ -25,17 +25,9 @@ namespace Authentication.API.Controllers
             {
                 var user = await _userPrivateProfilesService.RegisterUserAsync(request);
 
-                var jwt = JwtUtils.GenerateJWT(user, _configuration);
+                var token = JwtUtils.GenerateJWT(user, _configuration);
 
-                var accessMinutes = _configuration.GetValue("Jwt:AccessTokenMinutes", 15);
-
-                Response.Cookies.Append("jwt", jwt, new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = DateTimeOffset.UtcNow.AddMinutes(accessMinutes)
-                });
+                PutTokenIntoCookies(token);
 
                 return Created();
             }
@@ -57,25 +49,58 @@ namespace Authentication.API.Controllers
             }
         }
 
-        //[HttpPost("login")]
-        //public Task<ActionResult> LoginAsync()
-        //{
-        //    // validates credentials
-        //    // puts JWT in the cookies
-        //}
+        [HttpPost("login")]
+        public async Task<ActionResult> LoginAsync([FromBody] LoginRequest request)
+        {
+            try
+            {
+                var user = await _userPrivateProfilesService.ValidateCredentialsAndReturnProfileAsync(request);
 
-        //[HttpPost("logout")]
-        //public Task<ActionResult> LogoutAsync()
-        //{
-        //    // clears jwt form cookies
-        //}
+                var token = JwtUtils.GenerateJWT(user, _configuration);
 
-        //[HttpGet("refresh")]
-        //public Task<ActionResult> RefreshTokenAsync()
-        //{
-        //    // issue refresh token
-        //    // puts JWT in the cookies
-        //}
+                PutTokenIntoCookies(token);
+
+                return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        private void PutTokenIntoCookies(string token)
+        {
+            var accessMinutes = _configuration.GetValue("Jwt:AccessTokenMinutes", 15);
+
+            Response.Cookies.Append("jwt", token, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTimeOffset.UtcNow.AddMinutes(accessMinutes)
+            });
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<ActionResult> LogoutAsync()
+        {
+            Response.Cookies.Delete("jwt");
+
+            return Ok();
+        }
 
         [Authorize]
         [HttpGet("me")]
