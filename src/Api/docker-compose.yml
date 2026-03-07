@@ -1,0 +1,12 @@
+services:
+  authenticationdb:
+    image: postgres:15
+
+  authentication.api:
+    image: ${DOCKER_REGISTRY-}authenticationapi
+    build:
+      context: .
+      dockerfile: Services/Authentication/Authentication.API/Dockerfile
+
+volumes:
+  postgres_authentication:

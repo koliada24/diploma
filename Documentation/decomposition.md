@@ -43,3 +43,10 @@ Temporaly stores answers of tests that are currently taken by the students.
 
 ### Tests Store Service
 Contains data about all the taken tests, results.
+
+### Ports Mapping
+Authentication Service: 5000-5050, 6000-6060
+User Profiles Service: 5001-5051, 6001-6061
+Tests Templates Service: 5002-5052, 6002-6062
+Tests Proceccing Service: 5003-5053, 6003-6063
+Tests Store Service: 5004-5054, 6004-6064

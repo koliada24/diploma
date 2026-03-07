@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  authenticationdb:
+    container_name: authenticationdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=AuthenticationDB
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_authentication:/var/lib/postgresql/data/
+  
+  authentication.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - "ConnectionStrings__Database=Host=authenticationdb;Port=5432;Database=AuthenticationDB;Username=postgres;Password=postgres"
+    ports:
+      - "6000:8080"
+      - "6060:8081"
+    depends_on:
+      - authenticationdb
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
