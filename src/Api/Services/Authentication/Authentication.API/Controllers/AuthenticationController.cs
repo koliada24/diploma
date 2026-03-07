@@ -2,6 +2,8 @@
 using Authentication.API.Services;
 using Authentication.API.Utils;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Authentication.API.Controllers
 {
@@ -74,5 +76,21 @@ namespace Authentication.API.Controllers
         //    // issue refresh token
         //    // puts JWT in the cookies
         //}
+
+        [Authorize]
+        [HttpGet("me")]
+        public ActionResult Me()
+        {
+            if (User?.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                return Unauthorized("Not authenticated");
+            }
+
+            var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var login = User.Identity?.Name;
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            return Ok(new { Id = id, Login = login, Role = role });
+        }
     }
 }

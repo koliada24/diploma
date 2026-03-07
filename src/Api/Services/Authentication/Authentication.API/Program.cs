@@ -1,6 +1,7 @@
 using Authentication.API.Database;
 using Microsoft.EntityFrameworkCore;
 using Authentication.API.Services;
+using Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped<IUserPrivateProfilesService, UserPrivateProfilesService>();
+builder.AddIdentity();
 
 var app = builder.Build();
 
@@ -22,5 +24,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.MapControllers();
+
+app.UseIdentity();
 
 app.Run();

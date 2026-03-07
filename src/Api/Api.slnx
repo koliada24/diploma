@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/BuildingBlocks/">
+    <Project Path="Identity/Identity.csproj" Id="73d86b0f-5497-4505-b843-2543cb2f1000" />
+  </Folder>
   <Folder Name="/Services/" />
   <Folder Name="/Services/Authentication/">
     <Project Path="Services/Authentication/Authentication.API/Authentication.API.csproj" Id="3fa11ea4-75ba-467e-9d53-83ca171ef610" />
