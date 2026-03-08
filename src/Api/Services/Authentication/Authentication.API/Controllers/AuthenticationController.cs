@@ -18,7 +18,7 @@ namespace Authentication.API.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("register")]
+        [HttpPost("[controller]/register")]
         public async Task<ActionResult> RegisterAsync([FromBody] RegisterRequest request)
         {
             try
@@ -49,7 +49,7 @@ namespace Authentication.API.Controllers
             }
         }
 
-        [HttpPost("login")]
+        [HttpPost("[controller]/login")]
         public async Task<ActionResult> LoginAsync([FromBody] LoginRequest request)
         {
             try
@@ -94,7 +94,7 @@ namespace Authentication.API.Controllers
         }
 
         [Authorize]
-        [HttpPost("logout")]
+        [HttpPost("[controller]/logout")]
         public async Task<ActionResult> LogoutAsync()
         {
             Response.Cookies.Delete("jwt");
@@ -103,7 +103,7 @@ namespace Authentication.API.Controllers
         }
 
         [Authorize]
-        [HttpGet("me")]
+        [HttpGet("[controller]/me")]
         public ActionResult Me()
         {
             if (User?.Identity == null || !User.Identity.IsAuthenticated)
