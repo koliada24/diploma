@@ -9,6 +9,9 @@
   <Folder Name="/Services/Authentication/">
     <Project Path="Services/Authentication/Authentication.API/Authentication.API.csproj" Id="3fa11ea4-75ba-467e-9d53-83ca171ef610" />
   </Folder>
+  <Folder Name="/Services/UserProfiles/">
+    <Project Path="Services/UserProfiles/UserProfiles.API/UserProfiles.API.csproj" Id="5ced0cce-7d48-4d35-8578-475ad6a53408" />
+  </Folder>
   <Project Path="docker-compose.dcproj">
     <Build />
   </Project>
