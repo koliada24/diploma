@@ -2,11 +2,21 @@ services:
   authenticationdb:
     image: postgres:15
 
+  userprofilesdb:
+    image: postgres:15
+
   authentication.api:
     image: ${DOCKER_REGISTRY-}authenticationapi
     build:
       context: .
       dockerfile: Services/Authentication/Authentication.API/Dockerfile
 
+  userprofiles.api:
+    image: ${DOCKER_REGISTRY-}userprofilesapi
+    build:
+      context: .
+      dockerfile: Services/UserProfiles/UserProfiles.API/Dockerfile
+
 volumes:
   postgres_authentication:
+  postgres_userprofiles:

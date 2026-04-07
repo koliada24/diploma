@@ -30,5 +30,5 @@
       "useSSL": true
     }
   },
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "$schema": "http://json.schemastore.org/launchsettings.json"
 }
