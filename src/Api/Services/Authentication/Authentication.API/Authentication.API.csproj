@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Identity\Identity.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Identity\Identity.csproj" />
   </ItemGroup>
 
 </Project>
