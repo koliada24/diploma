@@ -13,7 +13,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Services/Authentication/Authentication.API/Authentication.API.csproj", "Services/Authentication/Authentication.API/"]
-COPY ["Identity/Identity.csproj", "Identity/"]
+COPY ["BuildingBlocks/Identity/Identity.csproj", "BuildingBlocks/Identity/"]
 RUN dotnet restore "./Services/Authentication/Authentication.API/Authentication.API.csproj"
 COPY . .
 WORKDIR "/src/Services/Authentication/Authentication.API"
