@@ -1,6 +1,7 @@
 using Identity;
 using Microsoft.EntityFrameworkCore;
 using UserProfiles.API.Database;
+using UserProfiles.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 builder.Services.AddControllers();
 builder.AddIdentity();
+
+builder.Services.AddScoped<IUserPublicProfilesService, UserPublicProfilesService>();
+builder.Services.AddScoped<IStudentsGroupsService, StudentsGroupsService>();
 
 var app = builder.Build();
 

@@ -5,15 +5,15 @@ using Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("Database");
     options.UseNpgsql(connectionString);
 });
+builder.Services.AddControllers();
+builder.AddIdentity();
 
 builder.Services.AddScoped<IUserPrivateProfilesService, UserPrivateProfilesService>();
-builder.AddIdentity();
 
 var app = builder.Build();
 
